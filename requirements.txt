@@ -1,0 +1,6 @@
+streamlit
+PyMuPDF
+langchain
+chromadb
+google-genai
+fitz 
