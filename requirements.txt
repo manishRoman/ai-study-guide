@@ -4,3 +4,4 @@ langchain
 chromadb
 google-genai
 langchain-text-splitters
+sentence-transformers
