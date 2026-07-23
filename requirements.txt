@@ -4,3 +4,4 @@ langchain
 chromadb
 google-genai
 fitz 
+langchain-text-splitters
