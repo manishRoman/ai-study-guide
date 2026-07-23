@@ -21,10 +21,7 @@ except ImportError:
 # ==========================================
 st.set_page_config(page_title="My PDF Chatbot", page_icon="🤖", layout="wide")
 
-GEMINI_API_KEY = (os.environ.get("GEMINI_API_KEY", "").strip() or st.secrets.get("gemini_api_key"))
-if not GEMINI_API_KEY:
-    st.error("Missing GEMINI_API_KEY. Set it in .env, environment variables, or Streamlit secrets.")
-    st.stop()
+GEMINI_API_KEY = "GEMINI_API_KEY"
 
 # --- Pydantic Schemas for Structured JSON Flashcards ---
 class Flashcard(BaseModel):
