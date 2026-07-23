@@ -22,8 +22,29 @@ except ImportError:
 # ==========================================
 st.set_page_config(page_title="My PDF Chatbot", page_icon="🤖", layout="wide")
 
-GEMINI_API_KEY = "GEMINI_API_KEY"
+#GEMINI_API_KEY = "GEMINI_API_KEY"
+#import streamlit as st
+#from google import genai
 
+# 1. Explicitly grab the key from Streamlit secrets and pass it to the Client
+api_key = st.secrets.get("GEMINI_API_KEY")
+client = genai.Client(api_key=api_key)
+
+# ... your other RAG code (chunking, ChromaDB, etc.) ...
+
+# 2. Force your RAG context into a raw string (Gemini crashes if fed LangChain objects)
+if isinstance(gemini_prompt, list):
+    # Extracts the raw text if your retriever passed a list of Document objects
+    safe_prompt = "\n".join([doc.page_content if hasattr(doc, 'page_content') else str(doc) for doc in gemini_prompt])
+else:
+    # Forces it to a standard string if it is already a single object
+    safe_prompt = str(gemini_prompt)
+
+# 3. Generate the response using the sanitized string
+response = client.models.generate_content(
+    model='gemini-2.5-flash',
+    contents=safe_prompt,
+)
 # --- Pydantic Schemas for Structured JSON Flashcards ---
 class Flashcard(BaseModel):
     front: str
