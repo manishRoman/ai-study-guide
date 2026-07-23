@@ -1,5 +1,5 @@
 import os
-import fitz  # PyMuPDF
+import PyMuPDF
 import chromadb
 from chromadb.utils import embedding_functions
 from langchain_text_splitters import RecursiveCharacterTextSplitter
